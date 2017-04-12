@@ -16,9 +16,9 @@ MapWrapper.prototype = {
 
     marker.onLoad = infowindow.open(this.googleMap,marker)
 
-    // marker.addListener('click', function(){
-    //   infowindow.open(this.googleMap,marker);
-    // })
+    marker.addListener('click', function(){
+      infowindow.open(this.googleMap,marker);
+    })
   }
 
 }
