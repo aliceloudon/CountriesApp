@@ -1,10 +1,15 @@
 var countriesArray = [];
+var mainMap;
 
 var app = function(){
   var url = "https://restcountries.eu/rest/v2/all"
   makeRequest(url, requestComplete);
- var countrySelected = document.querySelector('select')
+  var countrySelected = document.querySelector('select')
   countrySelected.onchange = handleSelectChange;
+  var startLocation = { lat: 0, lng: 0 }
+  
+  var container = document.querySelector('#main-map')
+   mainMap = new MapWrapper(container, startLocation, 1)
 }
 
 var requestComplete = function(){
@@ -19,19 +24,27 @@ var handleSelectChange = function(event){
   var liName = document.querySelector('#country-name')
   var liPopulation = document.querySelector('#country-population')
   var liCapital = document.querySelector('#country-capital')
-  var result
+  var result;
 
   countriesArray.forEach(function(country){
     if(country.name === this.value){
       result = country 
+      console.log(country)
       }  
   }.bind(this))
 
-  localStorage.setItem("selection", result)
-  
   liName.innerText = "Name: " +result.name
   liPopulation.innerText ="Population: " + result.population
   liCapital.innerText = "Capital: " + result.capital
+
+  var data = JSON.stringify(result)
+  localStorage.setItem("selection", data)
+  
+  var jsonString = localStorage.getItem("selection")
+  var location = JSON.parse(jsonString)
+  var locationCoords = { lat: location.latlng[0], lng: location.latlng[1] }
+  mainMap.googleMap.setCenter(locationCoords)
+  mainMap.googleMap.setZoom(5)
 };
 
 var populateList = function(countries){
