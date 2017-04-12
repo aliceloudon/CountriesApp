@@ -15,18 +15,23 @@ var requestComplete = function(){
   countriesArray = countries
 };
 
-var handleSelectChange = function(){
+var handleSelectChange = function(event){
   var liName = document.querySelector('#country-name')
   var liPopulation = document.querySelector('#country-population')
   var liCapital = document.querySelector('#country-capital')
   var result
+
   countriesArray.forEach(function(country){
     if(country.name === this.value){
-      result= country }  
+      result = country 
+      }  
   }.bind(this))
-  liName.innerText = result.name
-  liPopulation.innerText = result.population
-  liCapital.innerText = result.capital
+
+  localStorage.setItem("selection", result)
+  
+  liName.innerText = "Name: " +result.name
+  liPopulation.innerText ="Population: " + result.population
+  liCapital.innerText = "Capital: " + result.capital
 };
 
 var populateList = function(countries){
