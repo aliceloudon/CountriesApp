@@ -45,6 +45,7 @@ var handleSelectChange = function(event){
   var locationCoords = { lat: location.latlng[0], lng: location.latlng[1] }
   mainMap.googleMap.setCenter(locationCoords)
   mainMap.googleMap.setZoom(5)
+  mainMap.addMarker(locationCoords, result.name)
 };
 
 var populateList = function(countries){
