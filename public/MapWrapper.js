@@ -13,9 +13,12 @@ MapWrapper.prototype = {
     var infowindow = new google.maps.InfoWindow({
       content: text
     })
-    marker.addListener('click', function(){
-      infowindow.open(this.googleMap,marker);
-    })
+
+    marker.onLoad = infowindow.open(this.googleMap,marker)
+
+    // marker.addListener('click', function(){
+    //   infowindow.open(this.googleMap,marker);
+    // })
   }
 
 }

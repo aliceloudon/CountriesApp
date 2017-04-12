@@ -21,9 +21,9 @@ var requestComplete = function(){
 };
 
 var handleSelectChange = function(event){
-  var liName = document.querySelector('#country-name')
-  var liPopulation = document.querySelector('#country-population')
-  var liCapital = document.querySelector('#country-capital')
+  // var liName = document.querySelector('#country-name')
+  // var liPopulation = document.querySelector('#country-population')
+  // var liCapital = document.querySelector('#country-capital')
   var result;
 
   countriesArray.forEach(function(country){
@@ -33,9 +33,9 @@ var handleSelectChange = function(event){
       }  
   }.bind(this))
 
-  liName.innerText = "Name: " +result.name
-  liPopulation.innerText ="Population: " + result.population
-  liCapital.innerText = "Capital: " + result.capital
+  // liName.innerText = "Name: " +result.name
+  // liPopulation.innerText ="Population: " + result.population
+  // liCapital.innerText = "Capital: " + result.capital
 
   var data = JSON.stringify(result)
   localStorage.setItem("selection", data)
@@ -45,7 +45,7 @@ var handleSelectChange = function(event){
   var locationCoords = { lat: location.latlng[0], lng: location.latlng[1] }
   mainMap.googleMap.setCenter(locationCoords)
   mainMap.googleMap.setZoom(5)
-  mainMap.addMarker(locationCoords, result.name)
+  mainMap.addMarker(locationCoords, "<p>" + "Name: " + result.name + "<br />" + "Population: " + result.population + "<br />" + "Capital: " + result.capital + "</p>")
 };
 
 var populateList = function(countries){
